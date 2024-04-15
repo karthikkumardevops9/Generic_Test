@@ -1,0 +1,42 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+
+trigger:
+- main  # Adjust the branch as needed
+
+pool:
+  name: Default
+
+steps:
+- task: UseDotNet@2
+  inputs:
+    version: '3.x'  # Use the appropriate version of .NET
+
+- script: dotnet build --configuration Release
+  displayName: 'dotnet build'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+    arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: true
+    modifyOutputPath: false
+  displayName: 'dotnet publish'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 'drop'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure_DevOps_Service_Connection'
+    appType: 'webApp'
+    WebAppName: 'Tab-WebApp'
+    packageForLinux: '$(Pipeline.Workspace)/drop/*.zip'
+    ResourceGroupName: 'AzureDevOps_POC'
