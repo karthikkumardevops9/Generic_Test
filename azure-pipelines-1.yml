@@ -1,0 +1,18 @@
+trigger:
+- main  # Change this to match your branch
+
+pool:
+  name: Default  # Use a Windows agent
+
+steps:
+- checkout: self
+  persistCredentials: true
+
+- task: AzureRmWebAppDeployment@4
+  displayName: 'Deploy to Azure Web App'
+  inputs:
+    azureSubscription: 'MyWebAppSC'  # Connect this to your Azure subscription
+    appType: 'webApp'
+    WebAppName: 'MyDemoADO'  # Name of your Azure Web App
+    packageForLinux: '$(Build.SourcesDirectory)'  # Path to your GitHub repository
+    enableCustomDeployment: true
