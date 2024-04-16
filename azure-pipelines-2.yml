@@ -17,5 +17,5 @@ steps:
     azureSubscription: 'MyWebAppSC'
     appType: 'webAppLinux'
     WebAppName: 'MyDemoADO'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    packageForLinux: '$(Build.SourcesDirectory)'
 
