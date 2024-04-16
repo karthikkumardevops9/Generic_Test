@@ -13,6 +13,6 @@ steps:
   inputs:
     azureSubscription: 'testintegration'  # Connect this to your Azure subscription
     appType: 'webApp'
-    WebAppName: 'karthik2-webapp'  # Name of your Azure Web App
+    WebAppName: 'MyDemoADO'  # Name of your Azure Web App
     packageForLinux: '$(Build.SourcesDirectory)'  # Path to your GitHub repository
     enableCustomDeployment: true
