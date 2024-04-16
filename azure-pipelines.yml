@@ -11,7 +11,7 @@ steps:
 - task: AzureRmWebAppDeployment@4
   displayName: 'Deploy to Azure Web App'
   inputs:
-    azureSubscription: 'testintegration'  # Connect this to your Azure subscription
+    azureSubscription: 'MyWebAppSC'  # Connect this to your Azure subscription
     appType: 'webApp'
     WebAppName: 'MyDemoADO'  # Name of your Azure Web App
     packageForLinux: '$(Build.SourcesDirectory)'  # Path to your GitHub repository
