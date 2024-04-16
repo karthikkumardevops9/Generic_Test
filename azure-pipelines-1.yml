@@ -16,3 +16,6 @@ steps:
     WebAppName: 'MyDemoADO'  # Name of your Azure Web App
     packageForLinux: '$(Build.SourcesDirectory)'  # Path to your GitHub repository
     enableCustomDeployment: true
+    authenticationMethod: 'Basic'  # Specify basic authentication method for FTPS
+    username: '$(FTPUsername)'  # Specify your FTPS username (either application or user scope)
+    password: '$(FTPPassword)'  # Specify your FTPS password (either application or user scope)
